@@ -20,7 +20,7 @@
                 <td>{{$task->PM_id}}</td>
                 <td>{{$task->performer_id}}</td>
                 <td>{{$task->due_date}}</td>
-                <td></td>
+                <td style="color: #c15d2a">{{$task->calculateTimeLeft($task->id, $task->performer_id)}}</td>
                 <td>{{$task->completed}}</td>
 
            @empty

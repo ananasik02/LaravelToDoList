@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\Tag;
 use App\Models\User;
+use App\Notifications\TaskAssigned;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+
 
 class TasksController extends Controller
 {
@@ -34,15 +37,14 @@ class TasksController extends Controller
 
     public function store()
     {
-        //dd(request()->all());
 
         $task = new Task($this->validateTask());
-        //$task = new Task($this->validateTask());
-        //dd("here");
         $task->user_id = 1;
         $task->save();
         $task->tags()->attach(request('tags'));
-       // Task::create(request()->all());
+
+       // Notification::send(User::find(request()->performer_id), new TaskAssigned());
+        User::find(request()->performer_id)->notify(new TaskAssigned());
         return redirect(route('tasks.index'));
 
 
@@ -50,7 +52,12 @@ class TasksController extends Controller
 
     public function edit(Task $task)
     {
-        return view('tasks.edit' , ['task'=>$task]);
+        return view('tasks.edit' , [
+            'task'=>$task,
+            'tags' => Tag::all(),
+            'pms' => User::all(),
+            'performers' => User::all()
+        ]);
     }
 
     public function update(Task $task)
