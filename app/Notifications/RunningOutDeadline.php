@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RunningOutDeadline extends Notification
+class RunningOutDeadline extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -29,7 +29,7 @@ class RunningOutDeadline extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -41,7 +41,7 @@ class RunningOutDeadline extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('There are less than 24h to deadline')
+                    ->line('Your deadline is in a day!')
                     ->action('See task', url('/tasks/'))
                     ->line('Thank you for using our application!');
     }

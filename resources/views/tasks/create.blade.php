@@ -25,16 +25,21 @@
                 <div class="field">
                     <label class="label" for="PM_id">Project Manager</label>
                     <div class="control">
+{{--                        {{var_dump(auth()->user()->name )}}--}}
 {{--                        <input class="input @error('PM') is-danger @enderror" type="text" name="PM" id="PM" value="{{old('PM')}}">--}}
-                        <select name="PM_id">
-                            @foreach($pms as $pm)
-                                <option value="{{$pm->id}}">{{$pm->name}}</option>
-                            @endforeach
-                        </select>
 
-                        @error('PM_id')
-                        <p class="help is-danger">{{$errors->first('PM')}}</p>
-                        @enderror
+                        <input class="input" type="text" hidden="true" name="PM_id" id="PM_id" value="{{auth()->user()->id}}">
+                        <input class="input" type="text" name="" id="" value="{{auth()->user()->name}}">
+
+{{--                        <select name="PM_id">--}}
+{{--                            @foreach($pms as $pm)--}}
+{{--                                <option value="{{$pm->id}}">{{$pm->name}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+
+{{--                        @error('PM_id')--}}
+{{--                        <p class="help is-danger">{{$errors->first('PM')}}</p>--}}
+{{--                        @enderror--}}
                     </div>
                 </div>
 

@@ -23,15 +23,47 @@ class Task extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function findLinks($id)
+    {
+        $usr = User::find($id);
+        return $usr->name;
+    }
+
     public function calculateTimeLeft($id, $performer_id)
     {
         $startTime = new DateTime();
         $finishTime=new DateTime(Task::find($id)->due_date);
         $timeleft = $startTime->diff($finishTime, true);
-        if($timeleft->d < 1){
-            Notification::send(User::find($performer_id), new RunningOutDeadline());
-        }
         return $timeleft->d . "d " . $timeleft->h . "h " . $timeleft ->i . "m ";
+    }
+
+    public function checkDeadline($id, $performer_id)
+    {
+        $startTime = new DateTime();
+        $finishTime=new DateTime(Task::find($id)->due_date);
+        $timeleft = $startTime->diff($finishTime, true);
+        $delay = now()->addDays($timeleft->d - 1 );
+        User::find($performer_id)->notify(
+            (new RunningOutDeadline())->delay($delay)
+        );
+    }
+
+    public function isCompleted() : string
+    {
+        $attHtml = "";
+
+        if($this->completed==1){
+            $attHtml .= '<p>Yes</p>';
+        }else{
+
+            $attHtml .= '<p>No</p>
+                <form action="?action=check-box" method="post">
+                    <input type="checkbox" name="done" value="' . $this->id .
+                ' " />
+                    <input type="submit" name="formSubmit" hidden="true" value=" " </form> ';
+        }
+
+        return $attHtml;
     }
 
 

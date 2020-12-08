@@ -13,11 +13,13 @@ class TasksController extends Controller
 {
     public function index()
     {
-        if(request('tag')){
-            $tasks = Tag::where('name', request('tag'))->firstOrFail()->tasks;
-        }else {
-            $tasks = Task::latest()->get();
-        }
+        $user = auth()->user()->id;
+        $tasks = Task::
+            where('PM_id', '=', $user)
+            ->orWhere('performer_id', '=', $user)
+            ->latest()
+            ->get();
+
         return view('tasks.index',['tasks' => $tasks]);
     }
 
@@ -37,17 +39,13 @@ class TasksController extends Controller
 
     public function store()
     {
-
         $task = new Task($this->validateTask());
         $task->user_id = 1;
         $task->save();
         $task->tags()->attach(request('tags'));
-
-       // Notification::send(User::find(request()->performer_id), new TaskAssigned());
-        User::find(request()->performer_id)->notify(new TaskAssigned());
+        $task->checkDeadline($task->id, $task->performer_id);
+        User::find(request()->performer_id)->notify(new TaskAssigned($task->id, $task->title));
         return redirect(route('tasks.index'));
-
-
     }
 
     public function edit(Task $task)
@@ -60,6 +58,7 @@ class TasksController extends Controller
         ]);
     }
 
+
     public function update(Task $task)
     {
         $task->update($this->validateTask());
@@ -68,7 +67,16 @@ class TasksController extends Controller
 
     public function destroy()
     {
+        $task = Task::find(\request()->id);
+        $task->destroy(\request()->id);
+        return redirect(route('tasks.index'));
+    }
 
+    public function markDone()
+    {
+        $task = Task::find(\request()->id);
+        $task->update(['completed' => 1]);
+        return redirect(route('tasks.index'));
     }
 
     protected function validateTask()

@@ -16,9 +16,14 @@ class TaskAssigned extends Notification
      *
      * @return void
      */
-    public function __construct()
+    protected $taskId;
+    protected $taskName;
+    protected $url;
+    public function __construct($taskId, $taskName)
     {
-        //
+        $this->taskId = $taskId;
+        $this->taskName = $taskName;
+        $this->url = '/tasks/' . $taskId;
     }
 
     /**
@@ -29,7 +34,7 @@ class TaskAssigned extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -42,7 +47,7 @@ class TaskAssigned extends Notification
     {
         return (new MailMessage)
                     ->line('You have a new task assigned')
-                    ->action('See task', url('/'))
+                    ->action('See task', url($this->url))
                     ->line('Thank you for using our application!');
     }
 
@@ -55,7 +60,8 @@ class TaskAssigned extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'taskId' => $this->taskId,
+            'taskName' => $this->taskName
         ];
     }
 }
