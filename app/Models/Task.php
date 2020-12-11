@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\SendNotificarionProcess;
 use App\Models\User;
 use App\Notifications\RunningOutDeadline;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,33 +40,17 @@ class Task extends Model
 
     public function checkDeadline($id, $performer_id)
     {
+        $task=Task::find($id);
         $startTime = new DateTime();
-        $finishTime=new DateTime(Task::find($id)->due_date);
+        $finishTime=new DateTime($task->due_date);
         $timeleft = $startTime->diff($finishTime, true);
-        $delay = now()->addDays($timeleft->d - 1 );
-        User::find($performer_id)->notify(
-            (new RunningOutDeadline())->delay($delay)
-        );
+        $days = $timeleft->d-1;
+        //$delay = now()->addDays($days);
+        $delay = now() -> addMinutes(5);
+
+        $job = (new SendNotificarionProcess($task))->delay($delay);
+        $this->dispatch($job);
     }
-
-    public function isCompleted() : string
-    {
-        $attHtml = "";
-
-        if($this->completed==1){
-            $attHtml .= '<p>Yes</p>';
-        }else{
-
-            $attHtml .= '<p>No</p>
-                <form action="?action=check-box" method="post">
-                    <input type="checkbox" name="done" value="' . $this->id .
-                ' " />
-                    <input type="submit" name="formSubmit" hidden="true" value=" " </form> ';
-        }
-
-        return $attHtml;
-    }
-
 
     public function tags()
     {

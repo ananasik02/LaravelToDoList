@@ -20,3 +20,7 @@ Route::put('/tasks/{task}/done', 'App\Http\Controllers\TasksController@markDone'
 Route::get('/notifications', 'App\Http\Controllers\NotificationsController@index');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/contact', 'App\Http\Controllers\ContactsController@show');
+Route::post('/contact', 'App\Http\Controllers\ContactsController@store');
+

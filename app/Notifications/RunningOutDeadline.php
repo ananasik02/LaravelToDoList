@@ -16,9 +16,14 @@ class RunningOutDeadline extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    protected $taskId;
+    protected $taskName;
+    protected $url;
+    public function __construct($taskId, $taskName)
     {
-        //
+        $this->taskId = $taskId;
+        $this->taskName = $taskName;
+        $this->url = '/tasks/' . $taskId;
     }
 
     /**
@@ -42,7 +47,8 @@ class RunningOutDeadline extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->line('Your deadline is in a day!')
-                    ->action('See task', url('/tasks/'))
+                    ->line($this->taskName)
+                    ->action('See task', url($this->url))
                     ->line('Thank you for using our application!');
     }
 

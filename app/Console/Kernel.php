@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\ReguralMailingProccess;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\MounthlyUpdate::class
     ];
 
     /**
@@ -24,7 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        dd('Hello there');
+        $schedule->job(new ReguralMailingProccess('poweleg286@hebgsw.com'))
+            ->everyMinute();
+
     }
 
     /**

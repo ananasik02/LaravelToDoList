@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Jobs\SendNotificarionProcess;
 use App\Models\Task;
 use App\Models\Tag;
 use App\Models\User;
 use App\Notifications\TaskAssigned;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
-
+use DateTime;
 
 class TasksController extends Controller
 {
@@ -43,8 +44,15 @@ class TasksController extends Controller
         $task->user_id = 1;
         $task->save();
         $task->tags()->attach(request('tags'));
-        $task->checkDeadline($task->id, $task->performer_id);
         User::find(request()->performer_id)->notify(new TaskAssigned($task->id, $task->title));
+
+        $startTime = new DateTime();
+        $finishTime=new DateTime($task->due_date);
+        $timeleft = $startTime->diff($finishTime, true);
+        $days = $timeleft->d-1;
+        $delay = now()->addDays($days);
+        $job = (new SendNotificarionProcess($task))->delay($delay);
+        $this->dispatch($job);
         return redirect(route('tasks.index'));
     }
 

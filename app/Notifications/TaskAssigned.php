@@ -47,6 +47,7 @@ class TaskAssigned extends Notification
     {
         return (new MailMessage)
                     ->line('You have a new task assigned')
+                    ->line($this->taskName)
                     ->action('See task', url($this->url))
                     ->line('Thank you for using our application!');
     }

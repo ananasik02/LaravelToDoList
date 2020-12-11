@@ -26,7 +26,7 @@
                 <ul>
                     <li class="{{Request::path() === "/" ? 'current_page_item' : ' '}}"><a href="/" accesskey="1" title="">Homepage</a></li>
                     <li class="{{Request::path() === "tasks" ? 'current_page_item' : ' '}}"><a href="/tasks" accesskey="2" title="">Tasks</a></li>
-                    <li class="{{Request::path() === "contact" ? 'current_page_item' : ' '}}"><a href="#" accesskey="3" title="">Contact Us</a></li>
+                    <li class="{{Request::path() === "contact" ? 'current_page_item' : ' '}}"><a href="/contact" accesskey="3" title="">Contact Us</a></li>
                     <li class="{{Request::path() === "Notifications" ? 'current_page_item' : ' '}}">
                         <a href="/notifications" accesskey="4" title="">
                             <img src="images/notifications.png" alt="" style="width: 40px; height: 40px; margin-top: -15px;" />

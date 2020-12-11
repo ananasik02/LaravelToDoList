@@ -2,6 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Models\Task;
+use App\Models\User;
+use App\Notifications\RunningOutDeadline;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,9 +21,11 @@ class SendNotificarionProcess implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+
+    protected $task;
+    public function __construct($task)
     {
-        //
+        $this->task = $task;
     }
 
     /**
@@ -30,6 +35,9 @@ class SendNotificarionProcess implements ShouldQueue
      */
     public function handle()
     {
-        //
+        User::find($this->task->performer_id)->notify(
+            (new RunningOutDeadline($this->task->id, $this->task->title))
+        );
+
     }
 }
