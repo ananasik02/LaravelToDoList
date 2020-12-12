@@ -34,15 +34,10 @@ class TasksController extends Controller
 
     public function store()
     {
-        //dd(request()->all());
-
         $task = new Task($this->validateTask());
-        //$task = new Task($this->validateTask());
-        //dd("here");
         $task->user_id = 1;
         $task->save();
         $task->tags()->attach(request('tags'));
-       // Task::create(request()->all());
         return redirect(route('tasks.index'));
 
 
