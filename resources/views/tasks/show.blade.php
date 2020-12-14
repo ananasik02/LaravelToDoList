@@ -18,7 +18,7 @@
                     <p>Project Manager: {{$task->findLinks($task->PM_id)}}</p>
                     <p>Performer: {{$task->findLinks($task->performer_id)}}</p>
                     <p>Due date: {{$task->due_date}}</p>
-                    <p>Time left: {{$task->calculateTimeLeft($task->id, $task->performer_id)}} </p>
+                    <p>Time left: {{var_dump($task->calculateTimeLeft($task->id, $task->performer_id))}} </p>
                     <p style="margin-top: 1em">
                         @foreach($task->tags as $tag)
                             <a href="{{route('tasks.index' , ['tag' => $tag->name] ) }}">{{$tag->name}}</a>

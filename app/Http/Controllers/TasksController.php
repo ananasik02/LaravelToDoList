@@ -20,7 +20,6 @@ class TasksController extends Controller
             ->orWhere('performer_id', '=', $user)
             ->latest()
             ->get();
-
         return view('tasks.index',['tasks' => $tasks]);
     }
 
@@ -46,9 +45,8 @@ class TasksController extends Controller
         $task->tags()->attach(request('tags'));
         User::find(request()->performer_id)->notify(new TaskAssigned($task->id, $task->title));
 
-        $startTime = new DateTime();
-        $finishTime=new DateTime($task->due_date);
-        $timeleft = $startTime->diff($finishTime, true);
+
+        $timeleft = $task->calculateTimeLeft($task->id, $task->performer_id);
         $days = $timeleft->d-1;
         $delay = now()->addDays($days);
         $job = (new SendNotificarionProcess($task))->delay($delay);
