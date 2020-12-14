@@ -35,6 +35,13 @@ class Task extends Model
         $startTime = new DateTime();
         $finishTime=new DateTime(Task::find($id)->due_date);
         $timeleft = $startTime->diff($finishTime, true);
+        return $timeleft;
+        //return $timeleft->d . "d " . $timeleft->h . "h " . $timeleft ->i . "m ";
+    }
+
+    public function displayTimeLeft($id, $performer_id)
+    {
+        $timeleft = $this->calculateTimeLeft($id, $performer_id);
         return $timeleft->d . "d " . $timeleft->h . "h " . $timeleft ->i . "m ";
     }
 
@@ -45,7 +52,6 @@ class Task extends Model
         $finishTime=new DateTime($task->due_date);
         $timeleft = $startTime->diff($finishTime, true);
         $days = $timeleft->d-1;
-        //$delay = now()->addDays($days);
         $delay = now() -> addMinutes(5);
 
         $job = (new SendNotificarionProcess($task))->delay($delay);
