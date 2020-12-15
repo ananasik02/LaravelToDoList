@@ -23,7 +23,6 @@
                 <td>{{$task->findLinks($task->PM_id)}}</td>
                 <td>{{$task->findLinks($task->performer_id)}}</td>
                 <td>{{$task->due_date}}</td>
-                <td>{{ var_dump($task->calculateTimeLeft(900)) }}</td>
                 <td style="color: #c15d2a">{{ $task->displayTimeLeft($task->id) }}</td>
                 <td>
                     @if($task->completed == 1)

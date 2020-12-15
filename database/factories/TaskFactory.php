@@ -23,7 +23,6 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
             'title' => $this->faker->sentence,
             'PM_id' => User::factory(),
             'performer_id' => User::factory(),

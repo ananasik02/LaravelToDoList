@@ -32,10 +32,21 @@ class Task extends Model
 
     public function calculateTimeLeft($id)
     {
-        $startTime = new DateTime();
-        $finishTime=new DateTime(Task::find($id)->due_date);
-        $timeleft = $startTime->diff($finishTime, true);
+        if(Task::find($id))
+        {
+            $startTime = new DateTime();
+            $finishTime=new DateTime(Task::find($id)->due_date);
+            $timeleft = $startTime->diff($finishTime, false);
+            if($timeleft->invert){
+                $timeleft = -1;
+            }
+        }
+        else
+        {
+            $timeleft=0;
+        }
         return $timeleft;
+
     }
 
     public function displayTimeLeft($id)
