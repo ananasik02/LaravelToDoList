@@ -17,9 +17,9 @@ class TimeLeftTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function test_not_found_user_returns_zero_timeleft()
+    public function test_not_found_task_returns_zero_timeleft()
     {
-        $timeleft = (new Task())->calculateTimeLeft(1, 200);
+        $timeleft = (new Task())->calculateTimeLeft(900);
         $this->assertEquals(null, $timeleft);
     }
 }
