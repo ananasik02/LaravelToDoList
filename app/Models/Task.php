@@ -26,8 +26,12 @@ class Task extends Model
 
     public function findLinks($id)
     {
-        $usr = User::find($id);
-        return $usr->name;
+        if(!User::find($id)){
+            return 0;
+        }else{
+            $usr = User::find($id);
+            return $usr->name;
+        }
     }
 
     public function calculateTimeLeft($id)
@@ -58,15 +62,19 @@ class Task extends Model
     public function checkDeadline($id)
     {
         $task=Task::find($id);
+        if($task){
+            return 0;
+        }
+
         $timeleft = $this->calculateTimeLeft($id);
         $days = $timeleft->d-1;
+
+        if($days<1){
+            return 0;
+        }
+
         $delay = now() -> addDays($days);
         $job = (new SendNotificarionProcess($task))->delay($delay);
         $this->dispatch($job);
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
     }
 }

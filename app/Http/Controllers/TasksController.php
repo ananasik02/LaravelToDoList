@@ -40,9 +40,7 @@ class TasksController extends Controller
     public function store()
     {
         $task = new Task($this->validateTask());
-        $task->user_id = 1;
         $task->save();
-        $task->tags()->attach(request('tags'));
         User::find(request()->performer_id)->notify(new TaskAssigned($task->id, $task->title));
 
         $timeleft = $task->calculateTimeLeft($task->id, $task->performer_id);
