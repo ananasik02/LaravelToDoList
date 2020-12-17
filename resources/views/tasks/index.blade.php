@@ -5,6 +5,7 @@
         <form style="display: inline-block" action="/tasks/create" method="get">
             <button class= "btn btn-success">Create Task</button>
         </form>
+
         <table class="table">
             <thead>
             <tr>
@@ -20,8 +21,8 @@
            @forelse ($tasks as $task)
             <tr>
                 <td><a href="{{ route('tasks.show', $task) }}">{{$task->title}}</a></td>
-                <td>{{$task->findLinks($task->PM_id)}}</td>
-                <td>{{$task->findLinks($task->performer_id)}}</td>
+                <td>{{$task->pm()->name }}</td>
+                <td>{{$task->performer()->name }}</td>
                 <td>{{$task->due_date}}</td>
                 <td style="color: #c15d2a">{{ $task->displayTimeLeft($task->id) }}</td>
                 <td>

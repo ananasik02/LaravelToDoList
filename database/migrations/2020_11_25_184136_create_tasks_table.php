@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->unsignedBigInteger('performer_id');
-            $table->unsignedBigInteger('PM_id');
+            $table->unsignedBigInteger('pm_id');
             $table->boolean('completed')->default(false);
             $table->text('description')->default(null);
             $table->date('due_date');
@@ -29,7 +29,8 @@ class CreateTasksTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->foreign('PM_id')
+
+            $table->foreign('pm_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

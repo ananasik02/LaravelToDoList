@@ -19,19 +19,14 @@ class Task extends Model
 
     protected $guarded = [];
 
-    public function user()
+    public function performer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'foreign_key', 'performer_id');
     }
 
-    public function findLinks($id)
+    public function pm()
     {
-        if(!User::find($id)){
-            return 0;
-        }else{
-            $usr = User::find($id);
-            return $usr->name;
-        }
+        return $this->belongsTo(User::class, 'foreign_key', 'pm_id');
     }
 
     public function calculateTimeLeft($id)
