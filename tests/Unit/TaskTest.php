@@ -3,10 +3,11 @@
 namespace Tests\Unit;
 
 use App\Models\Task;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 class TaskTest extends TestCase
 {
-
+    use RefreshDatabase;
     public function test_not_found_task_returns_zero()
     {
         $check = (new Task())->checkDeadline(1000);

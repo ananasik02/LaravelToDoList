@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
     <div class="container">
         <form style="display: inline-block" action="/tasks/create" method="get">
             <button class= "btn btn-success">Create Task</button>
