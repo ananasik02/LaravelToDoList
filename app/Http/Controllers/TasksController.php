@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Jobs\SendNotificarionProcess;
 use App\Models\Task;
-use App\Models\Tag;
 use App\Models\User;
 use App\Notifications\TaskAssigned;
 use Illuminate\Http\Request;
@@ -31,7 +30,6 @@ class TasksController extends Controller
     public function create()
     {
         return view('tasks.create' , [
-            'tags' => Tag::all(),
             'pms' => User::all(),
             'performers' => User::all()
         ]);

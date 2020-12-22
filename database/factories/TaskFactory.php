@@ -26,7 +26,7 @@ class TaskFactory extends Factory
             'title' => $this->faker->sentence,
             'PM_id' => User::factory(),
             'performer_id' => User::factory(),
-            'due_date' => '2020-10-03',
+            'due_date' => '2024-10-03',
             'description' => $this->faker->paragraph
 
 

@@ -77,22 +77,6 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label for="due_date">Tags:</label>
-                    <div class="control">
-                        <select name="tags[]" multiple>
-                            @foreach($tags as $tag)
-                                <option value="{{$tag->id}}">{{$tag->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-
-                    @error('tags')
-                    <p class="help is-danger">{{$message}}</p>
-                    @enderror
-                </div>
-
                 <div class="field is-grouped">
                     <div class="control">
                         <button class="button is-link" type="submit">Submit</button>

@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="913002da-4e4b-4c89-95cb-1c6a1bc9b67a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Tag.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TasksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TasksController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_25_184136_create_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_25_184136_create_tasks_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_28_203958_create_tags_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/TaskFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/TaskFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/tasks/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tasks/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/tasks/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tasks/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/TaskTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/TaskTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,10 +181,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="591" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607705281512">
+    <state x="591" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608635444297">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="591" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1607705281512" />
+    <state x="591" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1608635444297" />
     <state x="729" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1607729016422">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
@@ -190,21 +193,21 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="779" y="311" width="424" height="491" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1608205535630" />
-    <state width="1240" height="183" key="GridCell.Tab.0.bottom" timestamp="1607979159557">
+    <state width="1240" height="194" key="GridCell.Tab.0.bottom" timestamp="1608636213392">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1240" height="183" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607979159557" />
-    <state width="1240" height="183" key="GridCell.Tab.0.center" timestamp="1607979159556">
+    <state width="1240" height="194" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1608636213392" />
+    <state width="1240" height="194" key="GridCell.Tab.0.center" timestamp="1608636213392">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1240" height="183" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607979159556" />
-    <state width="1240" height="183" key="GridCell.Tab.0.left" timestamp="1607979159555">
+    <state width="1240" height="194" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1608636213392" />
+    <state width="1240" height="194" key="GridCell.Tab.0.left" timestamp="1608636213391">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1240" height="183" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607979159555" />
-    <state width="1240" height="183" key="GridCell.Tab.0.right" timestamp="1607979159557">
+    <state width="1240" height="194" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1608636213391" />
+    <state width="1240" height="194" key="GridCell.Tab.0.right" timestamp="1608636213392">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1240" height="183" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607979159557" />
+    <state width="1240" height="194" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1608636213392" />
   </component>
 </project>

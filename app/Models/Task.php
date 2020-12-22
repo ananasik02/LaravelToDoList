@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Notifications\RunningOutDeadline;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Tag;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Notification;
@@ -37,7 +36,7 @@ class Task extends Model
             $finishTime=new DateTime(Task::find($id)->due_date);
             $timeleft = $startTime->diff($finishTime, false);
             if($timeleft->invert){
-                $timeleft = -1;
+                $timeleft = 0;
             }
         }
         else
@@ -51,25 +50,30 @@ class Task extends Model
     public function displayTimeLeft($id)
     {
         $timeleft = $this->calculateTimeLeft($id);
-        return $timeleft->d . "d " . $timeleft->h . "h " . $timeleft ->i . "m ";
+        if($timeleft)
+        {
+            return $timeleft->d . "d " . $timeleft->h . "h " . $timeleft ->i . "m ";
+        }
+        return 0;
     }
 
     public function checkDeadline($id)
     {
-        $task=Task::find($id);
-        if($task){
+        $task = Task::find($id);
+        if ($task) {
+            $timeleft = $this->calculateTimeLeft($id);
+            if ($timeleft) {
+                $days = $timeleft->d - 1;
+                $delay = now()->addDays($days);
+                $job = (new SendNotificarionProcess($task))->delay($delay);
+                $this->dispatch($job);
+            }
+            else {
+                return 0;
+
+            }
+        } else {
             return 0;
         }
-
-        $timeleft = $this->calculateTimeLeft($id);
-        $days = $timeleft->d-1;
-
-        if($days<1){
-            return 0;
-        }
-
-        $delay = now() -> addDays($days);
-        $job = (new SendNotificarionProcess($task))->delay($delay);
-        $this->dispatch($job);
     }
 }

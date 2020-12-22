@@ -21,8 +21,8 @@
            @forelse ($tasks as $task)
             <tr>
                 <td><a href="{{ route('tasks.show', $task) }}">{{$task->title}}</a></td>
-                <td>{{$task->pm()->name }}</td>
-                <td>{{$task->performer()->name }}</td>
+                <td>{{$task->pm }}</td>
+                <td>{{$task->performer }}</td>
                 <td>{{$task->due_date}}</td>
                 <td style="color: #c15d2a">{{ $task->displayTimeLeft($task->id) }}</td>
                 <td>
